@@ -14,6 +14,7 @@ public class FinishLine : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             finishEffect.Play();
+            GetComponent<AudioSource>().Play();
             Invoke("RestartGame", loadDelay); // wait 2 seconds before restarting the game
         }
     }

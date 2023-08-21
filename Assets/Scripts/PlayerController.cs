@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float torqueAmount = 1f;
+    [SerializeField] float torqueAmount = 10f;
     [SerializeField] float boostSpeed = 30f;
     [SerializeField] float baseSpeed = 20f;
+    bool canMove = true;
 
     Rigidbody2D rb2d;
     SurfaceEffector2D surfaceEffector2D;
@@ -21,8 +22,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotatePlayer();
-        RespondToBoost();
+        if (canMove)
+        {
+            RotatePlayer();
+            RespondToBoost();
+        }
     }
 
     private void RotatePlayer()
@@ -37,7 +41,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void RespondToBoost() {
+    public void DisableControls()
+    {
+        canMove = false;
+    }
+
+    private void RespondToBoost()
+    {
         // if we push up, then speed up
         // otherwise, stay at base speed
         // access the surfaceEffector2D and change speed
